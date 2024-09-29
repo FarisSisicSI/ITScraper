@@ -1,5 +1,6 @@
 import discord
 from scraper import NewsScraper
+from scraper import ChScraper
 
 
 class DiscordBot:
@@ -33,6 +34,20 @@ class DiscordBot:
             else:
                 await message.channel.send(news_data)
 
+        if message.content == "!ch-news":
+            await message.channel.send("**Sacekaj, prikupljamo podatke...**")
+
+            scraper = ChScraper("https://www.zenicablog.com/category/crna-hronika/nesrece/")
+            news_data1 = scraper.scrape()
+
+            await message.channel.send(news_data1)
+
+        if message.content == "!help":
+            await message.channel.send("--------------------------------------")
+            await message.channel.send("**Dobrodosli na spisak mojih komandi**")
+            await message.channel.send("--------------------------------------")
+            await message.channel.send("1. '!it-news' - saznajte nove vijesti sa ITVesti,")
+            await message.channel.send("2. '!ch-news' - saznajte nove nesrece sa Zenicablog")
 
 
     def run(self):
